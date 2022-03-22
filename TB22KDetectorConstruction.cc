@@ -111,7 +111,7 @@ G4VPhysicalVolume* TB22KDetectorConstruction::Construct()
 	//-------------------------------------------------------------------
 	G4Box* solid_T = new G4Box("solid_T",1.,1.,1.);
 	G4LogicalVolume* logic_T = new G4LogicalVolume(solid_T,fNist->FindOrBuildMaterial("G4_Galactic"),"logic_T");
-	G4VPhysicalVolume* physic_T = new G4PVPlacement(0,G4ThreeVector(1000,1000,0),logic_T,"physic_T",WorldLog,false,1,true);
+	G4VPhysicalVolume* physic_T = new G4PVPlacement(0,G4ThreeVector(worldDX-1.,worldDY-1.,0),logic_T,"physic_T",WorldLog,false,1,true);
 	fRun -> SetSensitiveDetector(physic_T);
 	//Acrylic Shield
 	//-------------------------------------------------------------------
