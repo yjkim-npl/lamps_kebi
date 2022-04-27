@@ -210,8 +210,8 @@ G4VPhysicalVolume* TB22KDetectorConstruction::Construct()
 		//Position
 		G4ThreeVector posCollX(0, 0, CollPosZ + CollDimZ/2.);
 		G4ThreeVector posCollY(0, 0, CollPosZ + CollDimZ/2. + CollDimZ);
-		new G4PVPlacement(0, posCollX, logicCollX, "CollimatorX", WorldLog, false, CollID, true);
-		new G4PVPlacement(0, posCollY, logicCollY, "CollimatorY", WorldLog, false, CollID, true);
+		new G4PVPlacement(0, posCollX, logicCollY, "CollimatorX", WorldLog, false, CollID, true);
+		new G4PVPlacement(0, posCollY, logicCollX, "CollimatorY", WorldLog, false, CollID, true);
 		/*
 		// front block set (up, down)
 		new G4PVPlacement(Rot, G4ThreeVector(0,0,CollPosZ+CollDimZ/2.), logicColl,"Collimator_1", WorldLog, false, fPar->GetParInt("CollID"), true);
