@@ -246,7 +246,8 @@ G4VPhysicalVolume* TB22KDetectorConstruction::Construct()
 		G4double ShieldDimZ  = fPar -> GetParDouble("ShieldDimZ");
 		G4double ShieldHoleX = fPar -> GetParDouble("ShieldHoleX");
 		G4double ShieldHoleY = fPar -> GetParDouble("ShieldHoleY");
-		G4double ShieldPosZ  = fPar -> GetParDouble("ShieldPosZ");
+		G4double ShieldPos0Z  = fPar -> GetParDouble("ShieldPos0Z");
+		G4double ShieldPos1Z  = fPar -> GetParDouble("ShieldPos1Z");
 
 		G4Box* solidBoxShield = new G4Box("solidBoxShield", ShieldDimX/2.,ShieldDimY/2.,ShieldDimZ/2.);
 		G4Box* solidSubShield = new G4Box("solidSubShield",ShieldHoleX/2.,ShieldHoleY/2.,ShieldDimZ/2.*1.03);
@@ -258,7 +259,8 @@ G4VPhysicalVolume* TB22KDetectorConstruction::Construct()
 		attShield -> SetForceWireframe(true);
 		logicShield -> SetVisAttributes(attShield);
 
-		new G4PVPlacement(0,G4ThreeVector(0,0,ShieldPosZ+ShieldDimZ/2. + trans),logicShield,"Shield",WorldLog,false,fPar->GetParInt("ShieldID"),true);
+		new G4PVPlacement(0,G4ThreeVector(0,0,ShieldPos0Z+ShieldDimZ/2. + trans),logicShield,"Shield1",WorldLog,false,fPar->GetParInt("ShieldID"),true);
+		new G4PVPlacement(0,G4ThreeVector(0,0,ShieldPos1Z+ShieldDimZ/2. + trans),logicShield,"Shield2",WorldLog,false,fPar->GetParInt("ShieldID"),true);
 	}
 	//SC
 	//--------------------------------------------------------------------
