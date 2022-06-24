@@ -250,17 +250,21 @@ G4VPhysicalVolume* TB22KDetectorConstruction::Construct()
 		G4double ShieldPos1Z  = fPar -> GetParDouble("ShieldPos1Z");
 
 		G4Box* solidBoxShield = new G4Box("solidBoxShield", ShieldDimX/2.,ShieldDimY/2.,ShieldDimZ/2.);
-		G4Box* solidSubShield = new G4Box("solidSubShield",ShieldHoleX/2.,ShieldHoleY/2.,ShieldDimZ/2.*1.03);
-		G4SubtractionSolid* solidShield = new G4SubtractionSolid("solidShield",solidBoxShield,solidSubShield,0,G4ThreeVector(0,0,0));
-		G4LogicalVolume* logicShield = new G4LogicalVolume(solidShield, Shieldmat, "logicShield");
+		G4Box* solidSubShield1 = new G4Box("solidSubShield",10*ShieldHoleX/2.,10*ShieldHoleY/2.,ShieldDimZ/2.*1.03);
+		G4Box* solidSubShield2 = new G4Box("solidSubShield",ShieldHoleX/2.,ShieldHoleY/2.,ShieldDimZ/2.*1.03);
+		G4SubtractionSolid* solidShield1 = new G4SubtractionSolid("solidShield",solidBoxShield,solidSubShield1,0,G4ThreeVector(0,0,0));
+		G4SubtractionSolid* solidShield2 = new G4SubtractionSolid("solidShield",solidBoxShield,solidSubShield2,0,G4ThreeVector(0,0,0));
+		G4LogicalVolume* logicShield1 = new G4LogicalVolume(solidShield1, Shieldmat, "logicShield");
+		G4LogicalVolume* logicShield2 = new G4LogicalVolume(solidShield2, Shieldmat, "logicShield");
 		//vis attributes
 		G4VisAttributes* attShield = new G4VisAttributes(G4Colour(G4Colour::Brown()));
 		attShield -> SetVisibility(true);
 		attShield -> SetForceWireframe(true);
-		logicShield -> SetVisAttributes(attShield);
+		logicShield1 -> SetVisAttributes(attShield);
+		logicShield2 -> SetVisAttributes(attShield);
 
-		new G4PVPlacement(0,G4ThreeVector(0,0,ShieldPos0Z+ShieldDimZ/2. + trans),logicShield,"Shield1",WorldLog,false,fPar->GetParInt("ShieldID"),true);
-		new G4PVPlacement(0,G4ThreeVector(0,0,ShieldPos1Z+ShieldDimZ/2. + trans),logicShield,"Shield2",WorldLog,false,fPar->GetParInt("ShieldID"),true);
+		new G4PVPlacement(0,G4ThreeVector(0,0,ShieldPos0Z+ShieldDimZ/2. + trans),logicShield1,"Shield1",WorldLog,false,fPar->GetParInt("ShieldID"),true);
+		new G4PVPlacement(0,G4ThreeVector(0,0,ShieldPos1Z+ShieldDimZ/2. + trans),logicShield2,"Shield2",WorldLog,false,fPar->GetParInt("ShieldID"),true);
 	}
 	//SC
 	//--------------------------------------------------------------------
